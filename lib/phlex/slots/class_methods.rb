@@ -14,6 +14,19 @@ module Phlex::Slots
       end
     end
 
+    def default_slot(slot_name)
+      raise MoreThanOneDefaultSlotError if defined?(@__default_slot_defined__)
+
+      @__slot_definitions__ ||= {}
+      @__slot_definitions__[slot_name] = false
+      @__default_slot_defined__ = true
+
+      define_method :__vanish__ do |*, &block|
+        content = capture(&block)
+        @__slots__[slot_name] = Slot.new(content: proc { unsafe_raw(content) })
+      end
+    end
+
     def slots = @__slot_definitions__ || {}
   end
 end

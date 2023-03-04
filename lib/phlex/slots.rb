@@ -9,6 +9,7 @@ module Phlex::Slots
   end
 
   class Error < StandardError; end
+  class MoreThanOneDefaultSlotError < Error; end
 
   def self.included(base)
     base.include(Phlex::DeferredRender)
