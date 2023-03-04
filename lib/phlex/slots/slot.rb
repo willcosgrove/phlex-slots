@@ -1,5 +1,5 @@
 module Phlex::Slots
-  class Slot
+  class Slot < Phlex::SGML
     attr_reader :attributes, :content
 
     def initialize(attributes: {}, content: nil)
@@ -7,6 +7,7 @@ module Phlex::Slots
       @content = content
     end
 
+    def template = yield_content(&@content)
     def to_proc = @content || proc {}
   end
 end
