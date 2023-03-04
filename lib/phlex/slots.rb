@@ -15,8 +15,16 @@ module Phlex::Slots
     base.include(Phlex::DeferredRender)
     base.extend(ClassMethods)
     base.prepend(Initializer)
-    base.class_eval do
-      def slot = @__slots__
+  end
+
+  def slot = @__slots__
+
+  def format_object(object)
+    case object
+    when Slot
+      unsafe_raw(object.call)
+    else
+      super
     end
   end
 end
