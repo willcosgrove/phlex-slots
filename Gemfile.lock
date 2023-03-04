@@ -1,0 +1,37 @@
+GIT
+  remote: https://github.com/joeldrapper/green_dots
+  revision: 6b61b1395fe17bb8ace78474c8b50927ea9dad63
+  specs:
+    green_dots (0.1.0)
+
+PATH
+  remote: .
+  specs:
+    phlex-slots (0.1.0)
+      phlex (~> 1.4)
+      zeitwerk (~> 2.6)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    concurrent-ruby (1.2.2)
+    phlex (1.4.0)
+      concurrent-ruby (~> 1.2)
+      zeitwerk (~> 2.6)
+    rake (10.5.0)
+    zeitwerk (2.6.7)
+
+PLATFORMS
+  arm64-darwin-22
+
+DEPENDENCIES
+  bundler (~> 2.4)
+  green_dots!
+  phlex-slots!
+  rake (~> 10.0)
+
+RUBY VERSION
+   ruby 3.2.1p31
+
+BUNDLED WITH
+   2.4.6
