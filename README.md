@@ -22,7 +22,55 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+class Alert < Phlex::HTML
+  include Phlex::Slots
+  
+  # Slots are defined with the slot macro
+  # They can optionally have a proc that defines their default content
+  slot :title, -> { default_title_for_style }
+  slot :body
+  
+  def initialize(style: :info)
+    @style = style
+  end
+  
+  def template
+    div(class: "border rounded p-6") do
+      # Slot content can be accessed via the slot method, which returns a hash 
+      # of slots keyed by the slot name.
+      #
+      # Slot attributes can be accessed by calling #attributes on the slot
+      #
+      # Slot content can be accessed either via #content, or by coercing the
+      # slot to a proc with the &
+      h1(**mix({class: "text-xl"}, slot[:title].attributes), &slot[:title])
+      p(**slot[:body].attributes, &slot[:body])
+    end
+  end
+  
+  private
+  
+  def default_title_for_style
+    case @style
+    when :info then "Heads up!"
+    when :error then "Uh oh!"
+    else
+      "Alert!"
+    end
+  end
+end
+
+# Slot content can be set to a string value through the initializer
+Alert.new(title: "My Alert Title") do |a|
+  # Or for more complex content, you can define it with a block
+  # Slots set this way can also have arbitrary attributes captured
+  a.body(class: "prose") do
+    img(src: "hang-in-there-cat.jpg")
+    plain("Don't worry, everything is going to be fine.")
+  end
+end
+```
 
 ## Development
 

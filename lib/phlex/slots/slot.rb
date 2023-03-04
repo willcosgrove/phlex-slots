@@ -8,6 +8,5 @@ module Phlex::Slots
     end
 
     def to_proc = @content || proc {}
-    def empty? = @content.nil?
   end
 end
